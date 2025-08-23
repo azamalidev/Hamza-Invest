@@ -282,12 +282,12 @@ export default function Dividends() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen p-6 md:p-8">
-      <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+    <div className="bg-white min-h-screen p-6 md:p-8">
+      <div className="max-w-7xl mx-auto bg-white rounded-lg border border-gray-300 p-6 md:p-8">
         {/* Header */}
         <div className="mb-10">
-          <h2 className="text-3xl font-bold text-gray-900 flex items-center">
-            <DivideCircle className="w-8 h-8 mr-3 text-blue-600" />
+          <h2 className="text-3xl font-bold text-black flex items-center">
+            <DivideCircle className="w-8 h-8 mr-3 text-black" />
             Dividends Dashboard
           </h2>
           <p className="text-gray-600 mt-2 text-lg">
@@ -297,16 +297,16 @@ export default function Dividends() {
 
         {/* Top Summary */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-all">
+          <div className="bg-white rounded-lg p-6 border border-gray-300 shadow-sm hover:shadow-md transition-all">
             <div className="flex justify-between items-start">
               <div>
                 <p className="text-base text-gray-600 font-medium">Total User P&L (Paid YTD)</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">
+                <p className="text-3xl font-bold text-black mt-2">
                   ${fmtMoney(totalEarnedYtd)}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <Wallet className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                <Wallet className="w-6 h-6 text-black" />
               </div>
             </div>
             <p className="text-sm text-gray-500 mt-4">
@@ -314,16 +314,16 @@ export default function Dividends() {
             </p>
           </div>
 
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100 shadow-sm hover:shadow-md transition-all">
+          <div className="bg-white rounded-lg p-6 border border-gray-300 shadow-sm hover:shadow-md transition-all">
             <div className="flex justify-between items-start">
               <div>
                 <p className="text-base text-gray-600 font-medium">All Corporations</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">
+                <p className="text-3xl font-bold text-black mt-2">
                   {data.corporations.length}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <Store className="w-6 h-6 text-green-600" />
+              <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                <Store className="w-6 h-6 text-black" />
               </div>
             </div>
             <p className="text-sm text-gray-500 mt-4">
@@ -334,24 +334,24 @@ export default function Dividends() {
 
         {/* Corporations (Buy/Sell quick list) */}
         <div className="mb-10">
-          <h3 className="text-xl font-semibold text-gray-900 mb-5 flex items-center">
-            <ArrowLeftRight className="w-6 h-6 mr-2 text-blue-600" />
+          <h3 className="text-xl font-semibold text-black mb-5 flex items-center">
+            <ArrowLeftRight className="w-6 h-6 mr-2 text-black" />
             Corporations (Buy / Sell)
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
             {data.corporations.map((corp) => (
               <div
                 key={corp.id}
-                className="flex items-center justify-between bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all"
+                className="flex items-center justify-between bg-white border border-gray-300 rounded-lg p-5 shadow-sm hover:shadow-md transition-all"
               >
                 <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
-                    <span className="font-semibold text-blue-700 text-lg">
+                  <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                    <span className="font-semibold text-black text-lg">
                       {corp.name.charAt(0)}
                     </span>
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900 text-lg">{corp.name}</p>
+                    <p className="font-semibold text-black text-lg">{corp.name}</p>
                     <p className="text-sm text-gray-600">
                       Your Invested: ${fmtMoney(corp.investedUsd)} • Ownership:{" "}
                       {ownershipPercent(corp.investedUsd)}%
@@ -361,13 +361,13 @@ export default function Dividends() {
                 <div className="flex gap-2">
                   <Link
                     href={`/market/${corp.id}/buy`}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                    className="px-4 py-2 bg-black text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
                   >
                     Buy
                   </Link>
                   <Link
                     href={`/market/${corp.id}/sell`}
-                    className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+                    className="px-4 py-2 border border-gray-400 text-black rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors"
                   >
                     Sell
                   </Link>
@@ -379,8 +379,8 @@ export default function Dividends() {
 
         {/* Dividend Details by Corporation */}
         <div className="mb-10">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-            <DivideCircle className="w-6 h-6 mr-2 text-blue-600" />
+          <h3 className="text-xl font-semibold text-black mb-6 flex items-center">
+            <DivideCircle className="w-6 h-6 mr-2 text-black" />
             Dividend Details by Corporation
           </h3>
 
@@ -406,7 +406,7 @@ export default function Dividends() {
               return (
                 <div
                   key={corp.id}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all overflow-hidden"
+                  className="bg-white rounded-lg border border-gray-300 shadow-sm hover:shadow-md transition-all overflow-hidden"
                 >
                   <button
                     onClick={() =>
@@ -417,13 +417,13 @@ export default function Dividends() {
                     aria-label={`Toggle details for ${corp.name}`}
                   >
                     <div className="flex items-center">
-                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
-                        <span className="font-semibold text-blue-700 text-lg">
+                      <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                        <span className="font-semibold text-black text-lg">
                           {corp.name.charAt(0)}
                         </span>
                       </div>
                       <div className="text-left">
-                        <p className="font-semibold text-gray-900 text-lg">{corp.name}</p>
+                        <p className="font-semibold text-black text-lg">{corp.name}</p>
                         <p className="text-base text-gray-600">
                           Your Invested: ${fmtMoney(corp.investedUsd)} • Ownership:{" "}
                           {ownPct}% • Paid YTD: ${fmtMoney(paidUserSum)}
@@ -443,8 +443,8 @@ export default function Dividends() {
                     }`}
                   >
                     {/* Ownership formula explanation */}
-                    <div className="p-5 border-t border-gray-200 bg-blue-50">
-                      <h4 className="text-base font-semibold text-gray-900 mb-3">
+                    <div className="p-5 border-t border-gray-300 bg-gray-50">
+                      <h4 className="text-base font-semibold text-black mb-3">
                         Ownership & Formula
                       </h4>
                       <p className="text-sm text-gray-700">
@@ -460,9 +460,9 @@ export default function Dividends() {
 
                     {/* Weekly / Monthly / Yearly sections */}
                     {(["Weekly", "Monthly", "Yearly"] as Period[]).map((period) => (
-                      <div key={period} className="p-5 border-t border-gray-200">
-                        <h5 className="text-base font-semibold text-gray-900 mb-3 flex items-center">
-                          <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                      <div key={period} className="p-5 border-t border-gray-300">
+                        <h5 className="text-base font-semibold text-black mb-3 flex items-center">
+                          <FileText className="w-5 h-5 mr-2 text-black" />
                           {period} Reports
                         </h5>
 
@@ -476,16 +476,16 @@ export default function Dividends() {
                               return (
                                 <div
                                   key={`${period}-${i}`}
-                                  className="border border-gray-200 rounded-lg p-4 bg-white shadow-sm"
+                                  className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm"
                                 >
                                   <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                                    <p className="text-base font-medium text-gray-900">
+                                    <p className="text-base font-medium text-black">
                                       {new Date(r.date).toLocaleDateString()} •{" "}
                                       <span
                                         className={`${
                                           r.companyPnlAmount >= 0
-                                            ? "text-green-700"
-                                            : "text-red-700"
+                                            ? "text-black"
+                                            : "text-black"
                                         }`}
                                       >
                                         Company P&amp;L: $
@@ -497,8 +497,8 @@ export default function Dividends() {
                                       <span
                                         className={`font-semibold ${
                                           yourShare >= 0
-                                            ? "text-green-700"
-                                            : "text-red-700"
+                                            ? "text-black"
+                                            : "text-black"
                                         }`}
                                       >
                                         ${fmtMoney(yourShare)}
@@ -520,7 +520,7 @@ export default function Dividends() {
                     ))}
 
                     {/* Export buttons */}
-                    <div className="p-5 border-t border-gray-200 flex justify-end gap-3">
+                    <div className="p-5 border-t border-gray-300 flex justify-end gap-3">
                       <button
                         onClick={() =>
                           downloadCsv(
@@ -528,7 +528,7 @@ export default function Dividends() {
                             reportsToCsvRows(corp)
                           )
                         }
-                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-base font-medium flex items-center"
+                        className="px-4 py-2 border border-gray-400 text-black rounded-lg hover:bg-gray-100 transition-colors text-base font-medium flex items-center"
                       >
                         <Download className="w-5 h-5 mr-2" />
                         Download {corp.name} CSV
@@ -544,7 +544,7 @@ export default function Dividends() {
           <div className="flex justify-end mt-6">
             <button
               onClick={() => downloadCsv("all_dividend_reports.csv", allCorpsCsvRows)}
-              className="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-base font-medium flex items-center"
+              className="px-5 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors text-base font-medium flex items-center"
             >
               <Download className="w-5 h-5 mr-2" />
               Download All Reports
@@ -553,26 +553,26 @@ export default function Dividends() {
         </div>
 
         {/* Quick Actions */}
-        <div className="pt-8 border-t border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-900 mb-5">Quick Actions</h3>
+        <div className="pt-8 border-t border-gray-300">
+          <h3 className="text-xl font-semibold text-black mb-5">Quick Actions</h3>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/withdraw"
-              className="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-base font-medium flex items-center"
+              className="px-5 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors text-base font-medium flex items-center"
             >
               <TrendingUp className="w-5 h-5 mr-2" />
               Request Withdrawal
             </Link>
             <button
               onClick={() => downloadCsv("all_dividend_reports.csv", allCorpsCsvRows)}
-              className="px-5 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-base font-medium flex items-center"
+              className="px-5 py-3 border border-gray-400 text-black rounded-lg hover:bg-gray-100 transition-colors text-base font-medium flex items-center"
             >
               <FileText className="w-5 h-5 mr-2" />
               Generate Dividend Report (CSV)
             </button>
             <Link
               href="/support"
-              className="px-5 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-base font-medium flex items-center"
+              className="px-5 py-3 border border-gray-400 text-black rounded-lg hover:bg-gray-100 transition-colors text-base font-medium flex items-center"
             >
               <AlertCircle className="w-5 h-5 mr-2" />
               Contact Support
