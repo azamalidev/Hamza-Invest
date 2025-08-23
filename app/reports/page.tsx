@@ -159,7 +159,7 @@ export default function Reports() {
             </h2>
             <p className="text-gray-600 mt-1 text-sm">Access, filter, and generate financial reports and audits for all corporations</p>
           </div>
-          <div className="flex items-center space-x-3 mt-4 md:mt-0">
+          {/* <div className="flex items-center space-x-3 mt-4 md:mt-0">
             <Link
               href="/company-info"
               className="px-4 py-2 border border-gray-300 text-black rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center"
@@ -167,7 +167,7 @@ export default function Reports() {
               <ArrowUpRight className="w-4 h-4 mr-2" />
               View Company Info
             </Link>
-          </div>
+          </div> */}
         </div>
 
         {/* Filters */}

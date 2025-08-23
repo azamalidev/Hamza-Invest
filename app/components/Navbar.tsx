@@ -23,13 +23,13 @@ export default function Navbar() {
 
   const clientNavItems = [
     { name: "Home", href: "/" },
-    { name: "Portfolio", href: "/portfolios" },
-    { name: "Buy/Sell", href: "/buys" },
-    { name: "Dividends", href: "/dividendss" },
-    { name: "Company Info", href: "/company-infos" },
-    { name: "Reports", href: "/reportss" },
-    { name: "Support", href: "/supports" },
-    { name: "Settings", href: "/settingss" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Buy", href: "/buy" },
+    { name: "Dividends", href: "/dividends" },
+    // { name: "Company Info", href: "/company-infos" },
+    { name: "Reports", href: "/report" },
+    // { name: "Support", href: "/supports" },
+    // { name: "Settings", href: "/setting" },
   ];
 
   const adminNavItems = [
@@ -38,7 +38,7 @@ export default function Navbar() {
     { name: "Upload Center", href: "/admin/uploads" },
     { name: "Withdrawal Requests", href: "/admin/withdrawals" },
     { name: "User Management", href: "/admin/users" },
-    { name: "Settings", href: "/settings" },
+    // { name: "Settings", href: "/settings" },
   ];
 
   const navItems = isAdmin ? [...clientNavItems, ...adminNavItems] : clientNavItems;

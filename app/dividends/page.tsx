@@ -24,9 +24,9 @@ export default function Dividends() {
           { amount: 150.00, date: "2023-06-15", status: "Paid", paymentMethod: "Bank Transfer", transactionId: "TX123456", reinvested: false, taxDeducted: 15.00, notes: "Quarterly dividend" },
           { amount: 120.00, date: "2023-03-15", status: "Paid", paymentMethod: "Reinvested", transactionId: "TX654321", reinvested: true, taxDeducted: 12.00, notes: "Special dividend" },
         ],
-        upcoming: [
-          { amount: 200.00, date: "2023-09-15", status: "Scheduled", expectedYield: 1.2, notes: "Projected based on current holdings" },
-        ],
+        // upcoming: [
+        //   { amount: 200.00, date: "2023-09-15", status: "Scheduled", expectedYield: 1.2, notes: "Projected based on current holdings" },
+        // ],
       },
       {
         id: 2,
@@ -37,9 +37,9 @@ export default function Dividends() {
           { amount: 250.00, date: "2023-06-10", status: "Paid", paymentMethod: "Bank Transfer", transactionId: "TX789012", reinvested: false, taxDeducted: 25.00, notes: "Annual dividend" },
           { amount: 225.00, date: "2023-03-10", status: "Paid", paymentMethod: "Reinvested", transactionId: "TX210987", reinvested: true, taxDeducted: 22.50, notes: "Interim dividend" },
         ],
-        upcoming: [
-          { amount: 300.00, date: "2023-09-10", status: "Scheduled", expectedYield: 1.5, notes: "Based on energy sector performance" },
-        ],
+        // upcoming: [
+        //   { amount: 300.00, date: "2023-09-10", status: "Scheduled", expectedYield: 1.5, notes: "Based on energy sector performance" },
+        // ],
       },
       {
         id: 3,
@@ -49,9 +49,9 @@ export default function Dividends() {
         history: [
           { amount: 75.00, date: "2023-06-20", status: "Paid", paymentMethod: "Bank Transfer", transactionId: "TX345678", reinvested: false, taxDeducted: 7.50, notes: "Rental income dividend" },
         ],
-        upcoming: [
-          { amount: 100.00, date: "2023-09-20", status: "Scheduled", expectedYield: 0.8, notes: "Projected from property valuations" },
-        ],
+        // upcoming: [
+        //   { amount: 100.00, date: "2023-09-20", status: "Scheduled", expectedYield: 0.8, notes: "Projected from property valuations" },
+        // ],
       },
       {
         id: 4,
@@ -59,9 +59,9 @@ export default function Dividends() {
         totalEarned: 0.00,
         upcoming: 25.00,
         history: [],
-        upcoming: [
-          { amount: 25.00, date: "2023-09-05", status: "Scheduled", expectedYield: 0.5, notes: "Initial dividend payout" },
-        ],
+        // upcoming: [
+        //   { amount: 25.00, date: "2023-09-05", status: "Scheduled", expectedYield: 0.5, notes: "Initial dividend payout" },
+        // ],
       },
     ],
   };
@@ -172,7 +172,7 @@ export default function Dividends() {
                     </div>
                     <div className="text-left">
                       <p className="font-medium text-black">{corp.name}</p>
-                      <p className="text-sm text-gray-600">Earned: ${corp.totalEarned.toFixed(2)} | Upcoming: ${corp.upcoming.toFixed(2)}</p>
+                      <p className="text-sm text-gray-600">Earned: ${corp.totalEarned.toFixed(2)} | Upcoming: ${corp?.upcoming}</p>
                     </div>
                   </div>
                   {expandedCorporation === index ? (

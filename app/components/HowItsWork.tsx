@@ -34,7 +34,7 @@ export default function HowItWorks() {
     },
     {
       title: "Invest & Track",
-      desc: "Buy/sell shares with live pricing, track portfolio and dividends.",
+      desc: "Buy shares with live pricing, track portfolio and dividends.",
       step: "3",
       icon: <ArrowUpDown className="w-5 h-5 animate-pulse" />,
       link: "/portfolio",
@@ -258,88 +258,11 @@ export default function HowItWorks() {
           </div>
         </motion.div>
 
-        {/* Admin Workflow */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center justify-center mb-8">
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="h-px bg-gray-300 flex-1"
-            ></motion.div>
-            <h3 className="text-2xl font-extrabold px-4 bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">
-              Admin Workflow
-            </h3>
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="h-px bg-gray-300 flex-1"
-            ></motion.div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {adminSteps.map((step, idx) => (
-              <Link
-                key={idx}
-                href={step.link}
-                className="block"
-                aria-label={`Navigate to ${step.title}`}
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group bg-white/70 backdrop-blur-md rounded-xl p-10 border border-gray-200/50 hover:border-gray-400/50 transition-all hover:shadow-lg relative overflow-hidden cursor-pointer"
-                  role="listitem"
-                >
-                  {/* Step gradient accent */}
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-gray-800 to-yellow-500/70 opacity-10 rounded-bl-full"></div>
-                  <div className="relative z-10">
-                    {/* Step indicator */}
-                    <motion.div
-                      className="w-14 h-14 rounded-full bg-gradient-to-r from-black to-gray-700 flex items-center justify-center text-white font-extrabold text-xl mb-6"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <span className="flex items-center justify-center">
-                        {step.icon}
-                        <span className="ml-2">{step.step}</span>
-                      </span>
-                    </motion.div>
-                    {/* Content */}
-                    <h3 className="text-2xl font-extrabold mb-3 text-black">{step.title}</h3>
-                    <p className="text-gray-700 text-sm leading-relaxed">{step.desc}</p>
-                    {/* Connector line (except last item) */}
-                    {idx !== adminSteps.length - 1 && (
-                      <motion.div
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        viewport={{ once: true }}
-                        className="hidden lg:block absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 w-10 h-px bg-gradient-to-r from-gray-300 to-yellow-500/70 group-hover:bg-yellow-500 transition"
-                      ></motion.div>
-                    )}
-                    {/* Mobile progression dots */}
-                    {idx !== adminSteps.length - 1 && (
-                      <div className="lg:hidden absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-300 rounded-full group-hover:bg-yellow-500/70 transition"></div>
-                    )}
-                  </div>
-                </motion.div>
-              </Link>
-            ))}
-          </div>
-        </motion.div>
+    
+        
 
         {/* Optional Features Teaser */}
-        {/* <motion.div
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -389,7 +312,7 @@ export default function HowItWorks() {
               </motion.div>
             ))}
           </div>
-        </motion.div> */}
+        </motion.div>
 
         {/* CTA at Bottom */}
         <motion.div

@@ -274,10 +274,10 @@ export default function CompanyInfo() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-black flex items-center">
+            {/* <h2 className="text-2xl font-bold text-black flex items-center">
               <Building2 className="w-6 h-6 mr-2 text-black" />
               Company Information
-            </h2>
+            </h2> */}
             <p className="text-gray-600 mt-1 text-sm">Detailed insights, roadmaps, financials, and reports for Hamza Waheed corporations</p>
           </div>
           <div className="flex items-center space-x-3 mt-4 md:mt-0">
@@ -496,7 +496,7 @@ export default function CompanyInfo() {
                       href={`/buy?corp=${company.id}&action=sell`}
                       className="px-4 py-2 border border-gray-300 text-black rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center"
                     >
-                      Sell Shares
+                      Buy Shares
                     </Link>
                     <Link
                       href="/support"

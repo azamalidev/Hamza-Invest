@@ -1,14 +1,30 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, BarChart2, ShieldCheck, FileText, DivideCircle, UserCheck, PieChart, MessageSquare, Smartphone, Lock } from "lucide-react";
-
- // Adjust path as needed
+import { Building2, TrendingUp, Users } from "lucide-react";
+// Adjust path as needed
 import Features from "./components/Feature";
 import HowItWorks from "./components/HowItsWork";
+import { useEffect, useRef } from 'react';
 
+const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
 export default function Hero() {
   // Placeholder for dynamic data (e.g., fetch from API for stats/corporations)
+  const globeRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (globeRef.current) {
+      // Position the globe at start
+      globeRef.current.pointOfView({ lat: 20, lng: 0, altitude: 2 }, 1000);
+
+      // Enable auto-rotation
+      globeRef.current.controls().autoRotate = true;
+      globeRef.current.controls().autoRotateSpeed = 0.8; // adjust speed (default ~2)
+    }
+  }, []);
   const statsData = [
     { value: "12+", label: "Active Corporations", icon: <PieChart className="h-5 w-5 text-black" /> },
     { value: "$5M+", label: "Total Investments", icon: <BarChart2 className="h-5 w-5 text-black" /> },
@@ -20,6 +36,37 @@ export default function Hero() {
     { name: "TechCorp", desc: "Innovative tech solutions", shares: "100K available" },
     { name: "GreenEnergy", desc: "Sustainable energy projects", shares: "50K available" },
     { name: "HealthWave", desc: "Healthcare advancements", shares: "75K available" },
+  ];
+
+
+  const organizations = [
+    {
+      name: "Green Energy Corp",
+      description:
+        "A leader in renewable energy solutions. Invest in solar, wind & hydro projects for a sustainable future.",
+      profit: "12.4%",
+      investors: "24k+",
+      growth: "18% YoY",
+      icon: <TrendingUp className="w-10 h-10 text-green-500" />,
+    },
+    {
+      name: "Health Plus",
+      description:
+        "Expanding healthcare facilities and digital health platforms across multiple regions.",
+      profit: "9.8%",
+      investors: "15k+",
+      growth: "12% YoY",
+      icon: <Users className="w-10 h-10 text-blue-500" />,
+    },
+    {
+      name: "Tech Innovators",
+      description:
+        "Revolutionizing AI & Blockchain for businesses worldwide. Be part of the digital future.",
+      profit: "15.7%",
+      investors: "30k+",
+      growth: "22% YoY",
+      icon: <Building2 className="w-10 h-10 text-purple-500" />,
+    },
   ];
 
   return (
@@ -129,7 +176,7 @@ export default function Hero() {
               <ArrowUpRight className="ml-2 h-4 w-4 inline" />
             </Link>
             <Link
-              href="#"
+              href="/explore"
               className="px-6 py-3 rounded-xl border-2 border-black text-black hover:bg-black hover:text-white font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1"
               aria-label="View available corporations"
             >
@@ -137,7 +184,7 @@ export default function Hero() {
             </Link>
             {/* Optional: Referral Program Teaser */}
             <Link
-              href="#"
+              href="/refarrel"
               className="px-6 py-3 rounded-xl border-2 border-gray-300 text-gray-700 hover:bg-gray-100 font-medium transition-all"
               aria-label="Learn about referral bonuses"
             >
@@ -220,11 +267,84 @@ export default function Hero() {
         </div>
       </motion.div>
 
+
+      <section className="relative mt-10 py-20 px-6 md:px-12 bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden">
+        {/* Background Globe */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-40 pointer-events-none">
+          <div className="w-[700px] h-[700px]">
+            <Globe
+              ref={globeRef}
+              globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+              bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+              backgroundColor="rgba(0,0,0,0)"
+              width={600}
+              height={600}
+            />
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto text-center z-10">
+          <motion.h2
+            className="text-4xl font-bold mb-6"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+             Explore Global Organizations
+          </motion.h2>
+
+          <motion.p
+            className="text-lg max-w-2xl text-center mx-auto mb-10 text-gray-700"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Discover organizations worldwide and invest in opportunities that make a difference.
+          </motion.p>
+
+          {/* Cards Section */}
+          <div className="grid gap-10 md:grid-cols-3 mt-10">
+            {organizations.map((org, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl hover:scale-105 transition-all duration-300 border border-gray-100 relative z-20"
+              >
+                <div className="flex justify-center mb-5">{org.icon}</div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">{org.name}</h3>
+                <p className="text-gray-600 text-sm mb-6">{org.description}</p>
+
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <p className="text-lg font-bold text-green-600">{org.profit}</p>
+                    <p className="text-xs text-gray-500">Annual Profit</p>
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold text-blue-600">{org.investors}</p>
+                    <p className="text-xs text-gray-500">Investors</p>
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold text-purple-600">{org.growth}</p>
+                    <p className="text-xs text-gray-500">Growth</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+
       {/* Integrated Sub-Components */}
       {/* TODO: Customize Features to include blockchain/AI teasers if enabled */}
-     <Features/>
+      <Features />
       {/* TODO: Customize HowItWorks to detail client/admin workflows */}
-      <HowItWorks/>
+      <HowItWorks />
     </section>
   );
 }

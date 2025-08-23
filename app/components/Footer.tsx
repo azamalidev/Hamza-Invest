@@ -66,40 +66,40 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/portfolios" className="hover:text-gray-600 hover:underline transition">
+              <Link href="/portfolio" className="hover:text-gray-600 hover:underline transition">
                 Portfolio
               </Link>
             </li>
             <li>
-              <Link href="/buys" className="hover:text-gray-600 hover:underline transition">
-                Buy/Sell
+              <Link href="/buy" className="hover:text-gray-600 hover:underline transition">
+                Buy
               </Link>
             </li>
             <li>
-              <Link href="/dividendss" className="hover:text-gray-600 hover:underline transition">
+              <Link href="/dividend" className="hover:text-gray-600 hover:underline transition">
                 Dividends
               </Link>
             </li>
-            <li>
-              <Link href="/company-infos" className="hover:text-gray-600 hover:underline transition">
+            {/* <li>
+              <Link href="/company-inf" className="hover:text-gray-600 hover:underline transition">
                 Company Info
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/reports" className="hover:text-gray-600 hover:underline transition">
                 Reports
               </Link>
             </li>
             <li>
-              <Link href="/supports" className="hover:text-gray-600 hover:underline transition">
+              <Link href="/support" className="hover:text-gray-600 hover:underline transition">
                 Support
               </Link>
             </li>
-            <li>
-              <Link href="/settingss" className="hover:text-gray-600 hover:underline transition">
+            {/* <li>
+              <Link href="/settingsx" className="hover:text-gray-600 hover:underline transition">
                 Settings
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
 

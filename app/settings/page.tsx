@@ -479,13 +479,13 @@ const Settings: FC = () => {
                 <ArrowUpRight className="w-4 h-4 mr-2" aria-hidden="true" />
                 View Portfolio
               </Link>
-              <Link
+              {/* <Link
                 href="/company-info"
                 className="px-4 py-2 border border-gray-300 text-black rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center"
               >
                 <User className="w-4 h-4 mr-2" aria-hidden="true" />
                 Company Information
-              </Link>
+              </Link> */}
               <Link
                 href="/dividends"
                 className="px-4 py-2 border border-gray-300 text-black rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center"

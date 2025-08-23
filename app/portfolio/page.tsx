@@ -2,13 +2,33 @@
 "use client";
 
 import { ArrowUpRight, TrendingUp, Wallet, DivideCircle, FileText, Building2, Download, BarChart2, ChevronDown, ChevronUp, MessageSquare, Shield } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie, Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+} from "chart.js";
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale
+);
+
 
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -16,6 +36,21 @@ export default function Portfolio() {
   const [expandedCorporation, setExpandedCorporation] = useState<number | null>(null);
   const [expandedDividend, setExpandedDividend] = useState<number | null>(null);
   const [autoWithdrawal, setAutoWithdrawal] = useState(false);
+
+
+  const [chartData, setChartData] = useState<any>({
+    labels: [],
+    datasets: [
+      {
+        label: "Hamza Tech Share Price ($)",
+        data: [],
+        borderColor: "#1f77b4",
+        backgroundColor: "rgba(31,119,180,0.2)",
+        fill: true,
+        tension: 0.3,
+      },
+    ],
+  });
 
   // Sample portfolio data (replace with API data in production)
   const portfolioData = {
@@ -122,18 +157,28 @@ export default function Portfolio() {
     ],
   };
 
-  // Chart.js data for pie chart
-  const chartData = {
-    labels: portfolioData.corporations.map((corp) => corp.name),
-    datasets: [
-      {
-        data: portfolioData.corporations.map((corp) => corp.value),
-        backgroundColor: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"],
-        borderColor: ["#ffffff"],
-        borderWidth: 1,
+
+
+
+
+  const lineOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        labels: { color: "#000" },
       },
-    ],
+    },
+    scales: {
+      x: {
+        ticks: { color: "#000" },
+      },
+      y: {
+        ticks: { color: "#000" },
+      },
+    },
   };
+
 
   const chartOptions = {
     responsive: true,
@@ -182,6 +227,25 @@ export default function Portfolio() {
           </div>
         </div>
 
+
+        <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+
+          {/* ====================== */}
+          {/* 🔹 Real-Time Graph */}
+          {/* ====================== */}
+          <div className="mb-10">
+            <h3 className="text-xl font-semibold text-black mb-4 flex items-center">
+              <TrendingUp className="w-5 h-5 mr-2 text-black" />
+              Real-Time Share Price
+            </h3>
+            <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+              <Line data={chartData} options={lineOptions} height={100} />
+            </div>
+          </div>
+
+          {/* keep your existing portfolio summary + rest of UI here */}
+        </div>
+
         {/* Portfolio Summary */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {/* Total Value */}
@@ -192,9 +256,8 @@ export default function Portfolio() {
                 <p className="text-2xl font-bold text-black mt-1">${portfolioData.totalValue.toLocaleString()}</p>
               </div>
               <div
-                className={`flex items-center px-2 py-1 rounded-full text-sm ${
-                  portfolioData.totalChange >= 0 ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-                } hover:${portfolioData.totalChange >= 0 ? "bg-green-200" : "bg-red-200"} transition-colors`}
+                className={`flex items-center px-2 py-1 rounded-full text-sm ${portfolioData.totalChange >= 0 ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                  } hover:${portfolioData.totalChange >= 0 ? "bg-green-200" : "bg-red-200"} transition-colors`}
               >
                 <TrendingUp
                   className={`w-4 h-4 mr-1 ${portfolioData.totalChange >= 0 ? "text-green-600" : "text-red-600"}`}
@@ -259,9 +322,8 @@ export default function Portfolio() {
                     <div className="text-right">
                       <p className="font-medium text-black">${corp.value.toLocaleString()}</p>
                       <p
-                        className={`text-sm flex items-center justify-end ${
-                          corp.change >= 0 ? "text-green-600" : "text-red-600"
-                        }`}
+                        className={`text-sm flex items-center justify-end ${corp.change >= 0 ? "text-green-600" : "text-red-600"
+                          }`}
                       >
                         <TrendingUp className="w-3 h-3 mr-1" />
                         {Math.abs(corp.change)}%
@@ -341,7 +403,7 @@ export default function Portfolio() {
                       href={`/buy?corp=${corp.id}&action=sell`}
                       className="px-4 py-2 border border-gray-300 text-black rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center"
                     >
-                      Sell Shares
+                      Buy Shares
                     </Link>
                   </div>
                 </div>
@@ -364,9 +426,8 @@ export default function Portfolio() {
               </div>
               <button
                 onClick={() => setAutoWithdrawal(!autoWithdrawal)}
-                className={`px-3 py-1 rounded-full text-sm ${
-                  autoWithdrawal ? "bg-green-600 text-white" : "bg-gray-200 text-black"
-                } hover:${autoWithdrawal ? "bg-green-700" : "bg-gray-300"} transition-colors`}
+                className={`px-3 py-1 rounded-full text-sm ${autoWithdrawal ? "bg-green-600 text-white" : "bg-gray-200 text-black"
+                  } hover:${autoWithdrawal ? "bg-green-700" : "bg-gray-300"} transition-colors`}
               >
                 {autoWithdrawal ? "Enabled" : "Disabled"}
               </button>
@@ -478,12 +539,12 @@ export default function Portfolio() {
               <p className="text-sm text-gray-600 mb-1">Transaction PIN</p>
               <p className="text-sm font-medium text-black">Set</p>
             </div>
-            <div>
+            {/* <div>
               <Link href="/settings" className="text-sm text-black hover:text-gray-600 flex items-center">
                 Manage Security Settings
                 <ArrowUpRight className="w-4 h-4 ml-1" />
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
 

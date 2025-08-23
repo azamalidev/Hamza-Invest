@@ -316,13 +316,13 @@ export default function Support() {
               <ArrowUpRight className="w-4 h-4 mr-2" />
               View Portfolio
             </Link>
-            <Link
+            {/* <Link
               href="/company-info"
               className="px-4 py-2 border border-gray-300 text-black rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center"
             >
               <FileText className="w-4 h-4 mr-2" />
               Company Information
-            </Link>
+            </Link> */}
             <Link
               href="/dividends"
               className="px-4 py-2 border border-gray-300 text-black rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center"

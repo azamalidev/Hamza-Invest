@@ -173,7 +173,7 @@ export default function Features() {
         </motion.div>
 
         {/* Admin Features */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -221,7 +221,7 @@ export default function Features() {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Optional Features */}
         <motion.div
