@@ -27,7 +27,7 @@ export default function Navbar() {
     { name: "Buy", href: "/buy" },
     { name: "Dividends", href: "/dividends" },
     // { name: "Company Info", href: "/company-infos" },
-    { name: "Reports", href: "/report" },
+    { name: "Reports", href: "/reports" },
     // { name: "Support", href: "/supports" },
     // { name: "Settings", href: "/setting" },
   ];
