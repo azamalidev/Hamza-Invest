@@ -28,7 +28,8 @@ export default function Navbar() {
     { name: "Dividends", href: "/dividends" },
     // { name: "Company Info", href: "/company-infos" },
     { name: "Reports", href: "/reports" },
-    // { name: "Support", href: "/supports" },
+    { name: "KYC", href: "/kyc" },
+    { name: "Withdraw", href: "/withdrawals" }, // <-- Add Withdraw button
     // { name: "Settings", href: "/setting" },
   ];
 

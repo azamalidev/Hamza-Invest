@@ -3,13 +3,42 @@
 import Link from "next/link";
 import { Lock, Mail, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  async function handleSignup(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: email, // use email as username
+          email,
+          password,
+          role: "user"
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.token) {
+        localStorage.setItem("token", data.token);
+        toast.success("Signup successful!");
+        // Optionally redirect to dashboard or login
+      } else {
+        toast.error(data.message || "Signup failed");
+      }
+    } catch (err) {
+      toast.error("Network error. Please try again.");
+    }
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-6 py-12">
+    <>
+      <Toaster position="top-right" />
+      <div className="min-h-screen flex items-center justify-center bg-white px-6 py-12">
       <div className="relative z-10 w-full max-w-md">
         {/* Logo/Header */}
         <div className="mb-10 text-center">
@@ -31,7 +60,7 @@ export default function SignInPage() {
           </div>
           <p className="text-gray-600 mb-6">Access your investment portfolio</p>
 
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSignup}>
             {/* Email Input */}
             <div>
               <label
@@ -152,6 +181,7 @@ export default function SignInPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

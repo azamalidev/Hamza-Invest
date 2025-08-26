@@ -15,14 +15,14 @@ import {
 } from "lucide-react";
 
 const items = [
-  { href: "/dashboard", label: "Dashboard", icon: Home },
-  { href: "/corporations", label: "Corporations", icon: Building2 },
-  { href: "/users", label: "Users (KYC)", icon: Users2 },
-  { href: "/dividends", label: "Dividends", icon: BarChart2 },
-  { href: "/withdrawals", label: "Withdrawals", icon: Wallet2 },
-  { href: "/documents", label: "Documents", icon: FileText },
-  { href: "/notifications", label: "Notifications", icon: Bell },
-  { href: "/settings", label: "Settings", icon: Shield },
+  { href: "/admin/dashboard", label: "Dashboard", icon: Home },
+  { href: "/admin/corporations", label: "Corporations", icon: Building2 },
+  { href: "/admin/users", label: "Users (KYC)", icon: Users2 },
+  { href: "/admin/dividends", label: "Dividends", icon: BarChart2 },
+  { href: "/admin/withdrawals", label: "Withdrawals", icon: Wallet2 },
+  { href: "/admin/documents", label: "Documents", icon: FileText },
+  { href: "/admin/notifications", label: "Notifications", icon: Bell },
+  { href: "/admin/settings", label: "Settings", icon: Shield },
 ];
 
 export default function Sidebar() {

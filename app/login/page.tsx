@@ -2,13 +2,43 @@
 import Link from "next/link";
 import { Lock, Mail, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok && data.token) {
+        localStorage.setItem("token", data.token);
+        toast.success("Login successful!");
+        if (data.role === "admin") {
+          router.push("/admin/dashboard");
+        } else {
+          router.push("/");
+        }
+      } else {
+        toast.error(data.message || "Login failed");
+      }
+    } catch (err) {
+      toast.error("Network error. Please try again.");
+    }
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-6 py-12">
+    <>
+      <Toaster position="top-right" />
+      <div className="min-h-screen flex items-center justify-center bg-white px-6 py-12">
       <div className="relative z-10 w-full max-w-md">
         {/* Logo/Header */}
         <div className="mb-10 text-center">
@@ -30,7 +60,7 @@ export default function LoginPage() {
           </div>
           <p className="text-gray-600 mb-6">Access your investment dashboard</p>
 
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleLogin}>
             {/* Email Input */}
             <div>
               <label
@@ -150,5 +180,6 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
+     </>
   );
 }
