@@ -1,3 +1,5 @@
+'use client'
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -14,16 +16,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Hamza Invest",
-  description: "A secure multi-corporation investment platform",
-};
+
+import { useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+  const router = typeof window !== "undefined" ? require("next/navigation").useRouter() : null;
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      const publicRoutes = ["/login", "/signup"];
+      // Always redirect new users (no token) to /login
+      if (!token && window.location.pathname !== "/login" && window.location.pathname !== "/signup") {
+        window.location.href = "/login";
+      }
+    }
+  }, [pathname]);
+
   return (
     <html lang="en">
       <body
@@ -33,7 +48,7 @@ export default function RootLayout({
         <Navbar />
 
         {/* Main content */}
-        <main className="flex-1 pt-16">{children}</main>
+        <main className="flex-1 ">{children}</main>
 
         {/* Footer at bottom */}
         <Footer />

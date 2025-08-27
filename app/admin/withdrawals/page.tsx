@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import {
   Card,
@@ -29,8 +30,29 @@ type Withdrawal = {
 };
 
 export default function WithdrawalsPage() {
+  const router = useRouter();
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [withdrawals, setWithdrawals] = useState<Withdrawal[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setIsAdmin(false);
+      router.replace("/login");
+      return;
+    }
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      setIsAdmin(payload.role === "admin");
+      if (payload.role !== "admin") {
+        router.replace("/");
+      }
+    } catch {
+      setIsAdmin(false);
+      router.replace("/login");
+    }
+  }, [router]);
 
   useEffect(() => {
     async function fetchWithdrawals() {
@@ -76,6 +98,8 @@ export default function WithdrawalsPage() {
       toast.error("Network error");
     }
   }
+
+  if (isAdmin === false) return null;
 
   return (
     <main className="min-h-screen p-8 space-y-8 bg-gray-50">

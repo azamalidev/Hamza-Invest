@@ -20,12 +20,25 @@ export default function LoginPage() {
       });
       const data = await res.json();
       if (res.ok && data.token) {
-        localStorage.setItem("token", data.token);
-        toast.success("Login successful!");
-        if (data.role === "admin") {
-          router.push("/admin/dashboard");
+        // Check KYC status
+        const kycRes = await fetch(`http://localhost:5000/api/kyc?email=${encodeURIComponent(email)}`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${data.token}`,
+            "Content-Type": "application/json"
+          }
+        });
+        const kycData = await kycRes.json();
+        if (kycRes.ok && kycData.status === "approved") {
+          localStorage.setItem("token", data.token);
+          toast.success("Login successful!");
+          if (data.role === "admin") {
+            router.push("/admin/dashboard");
+          } else {
+            router.push("/");
+          }
         } else {
-          router.push("/");
+          toast.error(kycData.status === "pending" ? "Your KYC is under review." : (kycData.status === "rejected" ? "Your KYC was rejected." : "KYC not found. Please complete KYC."));
         }
       } else {
         toast.error(data.message || "Login failed");
@@ -38,7 +51,7 @@ export default function LoginPage() {
   return (
     <>
       <Toaster position="top-right" />
-      <div className="min-h-screen flex items-center justify-center bg-white px-6 py-12">
+      <div className="min-h-screen mt-14 flex items-center justify-center bg-white px-6 py-12">
       <div className="relative z-10 w-full max-w-md">
         {/* Logo/Header */}
         <div className="mb-10 text-center">
