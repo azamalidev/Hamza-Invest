@@ -114,6 +114,7 @@ export default function DividendsPage() {
                 <TH>Pay Date</TH>
                 <TH>Status</TH>
             
+              
               </TR>
             </THead>
             <TBody>
