@@ -58,9 +58,10 @@ export default function AdminUsersPage() {
     async function fetchKycs() {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/kyc/all", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kyc/all`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         const data = await res.json();
         setKycs(data.kycs || []);
       } catch (err) {
@@ -76,7 +77,7 @@ export default function AdminUsersPage() {
     async function fetchUsers() {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:5000/api/auth/all', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/all`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -96,7 +97,7 @@ export default function AdminUsersPage() {
     setDeleteLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/auth/${deleteUserId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/${deleteUserId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -116,7 +117,7 @@ export default function AdminUsersPage() {
   async function handleEditUserRole(id: string) {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/auth/${id}/role`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/${id}/role`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -139,7 +140,7 @@ export default function AdminUsersPage() {
   async function handleStatusChange(id: string) {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/kyc/${id}/status`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kyc/${id}/status`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -165,7 +166,7 @@ export default function AdminUsersPage() {
     <>
       <Toaster position="top-right" />
       <div className="p-8 bg-gray-50 min-h-screen border-2">
-        
+
         <div className="flex gap-2 mb-8 bg-white p-1 rounded-lg w-max shadow-sm">
           <button
             className={`px-6 py-3 rounded-lg font-medium transition-all ${activeTab === 'users' ? 'bg-black text-white shadow' : 'bg-transparent text-gray-500 hover:text-gray-700'}`}
@@ -180,7 +181,7 @@ export default function AdminUsersPage() {
             KYC Verifications
           </button>
         </div>
-        
+
         {activeTab === 'users' ? (
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="overflow-x-auto">
@@ -235,7 +236,7 @@ export default function AdminUsersPage() {
                                 className="px-3 py-1.5 bg-blue-100 text-blue-700 text-sm rounded-lg font-medium hover:bg-blue-200 transition-colors"
                                 onClick={() => { setEditingUserId(user._id); setEditRole(user.role || 'user'); }}
                               >
-                                Edit 
+                                Edit
                               </button>
                               <button
                                 className="px-3 py-1.5 bg-red-100 text-red-700 text-sm rounded-lg font-medium hover:bg-red-200 transition-colors"
@@ -243,30 +244,30 @@ export default function AdminUsersPage() {
                               >
                                 Delete
                               </button>
-      {/* Delete Confirmation Modal */}
-      {deleteUserId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-transparent backdrop-blur-xs bg-opacity-40">
-          <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-sm relative animate-in fade-in">
-            <h2 className="text-xl font-bold mb-4 text-gray-800 text-center">Confirm Delete</h2>
-            <p className="mb-6 text-gray-600 text-center">Are you sure you want to delete this user? This action cannot be undone.</p>
-            <div className="flex justify-center gap-4">
-              <button
-                className="px-5 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
-                onClick={confirmDeleteUser}
-                disabled={deleteLoading}
-              >
-                {deleteLoading ? 'Deleting...' : 'Delete'}
-              </button>
-              <button
-                className="px-5 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
-                onClick={() => setDeleteUserId(null)}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+                              {/* Delete Confirmation Modal */}
+                              {deleteUserId && (
+                                <div className="fixed inset-0 z-50 flex items-center justify-center bg-transparent backdrop-blur-xs bg-opacity-40">
+                                  <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-sm relative animate-in fade-in">
+                                    <h2 className="text-xl font-bold mb-4 text-gray-800 text-center">Confirm Delete</h2>
+                                    <p className="mb-6 text-gray-600 text-center">Are you sure you want to delete this user? This action cannot be undone.</p>
+                                    <div className="flex justify-center gap-4">
+                                      <button
+                                        className="px-5 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
+                                        onClick={confirmDeleteUser}
+                                        disabled={deleteLoading}
+                                      >
+                                        {deleteLoading ? 'Deleting...' : 'Delete'}
+                                      </button>
+                                      <button
+                                        className="px-5 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+                                        onClick={() => setDeleteUserId(null)}
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
                             </>
                           )}
                         </div>

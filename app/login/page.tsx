@@ -13,7 +13,7 @@ export default function LoginPage() {
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -27,7 +27,7 @@ export default function LoginPage() {
           return;
         }
         // Check KYC status for non-admin users
-        const kycRes = await fetch(`http://localhost:5000/api/kyc?email=${encodeURIComponent(email)}`, {
+        const kycRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kyc?email=${encodeURIComponent(email)}`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${data.token}`,

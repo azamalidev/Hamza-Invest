@@ -32,7 +32,7 @@ export default function UserWithdrawPage() {
         setLoading(false);
         return;
       }
-      const res = await fetch("http://localhost:5000/api/withdrawals", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/withdrawals`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

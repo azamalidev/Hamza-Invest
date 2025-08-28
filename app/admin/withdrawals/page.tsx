@@ -58,9 +58,10 @@ export default function WithdrawalsPage() {
     async function fetchWithdrawals() {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/withdrawals", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/withdrawals`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         const data = await res.json();
         setWithdrawals(data.withdrawals || []);
       } catch (err) {
@@ -76,7 +77,7 @@ export default function WithdrawalsPage() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/withdrawals/${id}/status`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/withdrawals/${id}/status`,
         {
           method: "PUT",
           headers: {
@@ -125,7 +126,7 @@ export default function WithdrawalsPage() {
                   <TH>Method</TH>
                   <TH>Status</TH>
                   <TH>Requested</TH>
-                
+
                 </TR>
               </THead>
               <TBody>
@@ -137,13 +138,12 @@ export default function WithdrawalsPage() {
                     </TD>
                     <TD className="capitalize">{w.method}</TD>
                     <TD
-                      className={`capitalize font-medium ${
-                        w.status === "approved"
+                      className={`capitalize font-medium ${w.status === "approved"
                           ? "text-green-600"
                           : w.status === "pending"
-                          ? "text-yellow-600"
-                          : "text-red-600"
-                      }`}
+                            ? "text-yellow-600"
+                            : "text-red-600"
+                        }`}
                     >
                       {w.status}
                     </TD>

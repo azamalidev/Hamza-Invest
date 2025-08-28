@@ -36,7 +36,7 @@ export default function SignInPage() {
     if (!signupData) return;
     try {
       // Signup API
-      const signupRes = await fetch("http://localhost:5000/api/auth/register", {
+      const signupRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -66,7 +66,7 @@ export default function SignInPage() {
   formData.append("email", signupData.email);
   formData.append("userEmail", signupData.email);
   if (idFile) formData.append("idFile", idFile);
-      const kycRes = await fetch("http://localhost:5000/api/kyc", {
+      const kycRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kyc`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${signup.token}`,
