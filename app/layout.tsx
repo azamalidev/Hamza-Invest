@@ -18,6 +18,8 @@ const geistMono = Geist_Mono({
 
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 export default function RootLayout({
   children,

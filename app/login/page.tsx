@@ -20,7 +20,13 @@ export default function LoginPage() {
       });
       const data = await res.json();
       if (res.ok && data.token) {
-        // Check KYC status
+        if (data.role === "admin") {
+          localStorage.setItem("token", data.token);
+          toast.success("Admin login successful!");
+          router.push("/admin/dashboard");
+          return;
+        }
+        // Check KYC status for non-admin users
         const kycRes = await fetch(`http://localhost:5000/api/kyc?email=${encodeURIComponent(email)}`, {
           method: "GET",
           headers: {
@@ -32,11 +38,7 @@ export default function LoginPage() {
         if (kycRes.ok && kycData.status === "approved") {
           localStorage.setItem("token", data.token);
           toast.success("Login successful!");
-          if (data.role === "admin") {
-            router.push("/admin/dashboard");
-          } else {
-            router.push("/");
-          }
+          router.push("/");
         } else {
           toast.error(kycData.status === "pending" ? "Your KYC is under review." : (kycData.status === "rejected" ? "Your KYC was rejected." : "KYC not found. Please complete KYC."));
         }
